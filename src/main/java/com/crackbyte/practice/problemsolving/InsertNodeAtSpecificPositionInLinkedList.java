@@ -1,10 +1,12 @@
-package com.crackbyte.problemsolving;
+package com.crackbyte.practice.problemsolving;
 
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+
+import static com.crackbyte.utils.Constants.PATTERN;
 
 public class InsertNodeAtSpecificPositionInLinkedList {
 
@@ -53,19 +55,19 @@ public class InsertNodeAtSpecificPositionInLinkedList {
         SinglyLinkedList llist = new SinglyLinkedList();
 
         int llistCount = scanner.nextInt();
-        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+        scanner.skip(PATTERN);
 
         for (int i = 0; i < llistCount; i++) {
             int llistItem = scanner.nextInt();
-            scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+            scanner.skip(PATTERN);
             llist.insertNode(llistItem);
         }
 
         int data = scanner.nextInt();
-        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+        scanner.skip(PATTERN);
 
         int position = scanner.nextInt();
-        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+        scanner.skip(PATTERN);
 
         SinglyLinkedListNode llist_head = insertNodeAtPosition(llist.head, data, position);
 

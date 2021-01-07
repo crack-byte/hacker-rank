@@ -1,20 +1,22 @@
-package com.crackbyte.problemsolving;
+package com.crackbyte.practice.problemsolving;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
-public class MergeTwoSortedLinkedLists {
+import static com.crackbyte.utils.Constants.PATTERN;
+
+public class ReverseALinkedList {
 
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void printSinglyLinkedList(SinglyLinkedListNode node, String sep, BufferedWriter bufferedWriter) throws IOException {
         while (node != null) {
             bufferedWriter.write(String.valueOf(node.data));
-
             node = node.next;
-
             if (node != null) {
                 bufferedWriter.write(sep);
             }
@@ -30,63 +32,37 @@ public class MergeTwoSortedLinkedLists {
      * }
      *
      */
-    static SinglyLinkedListNode mergeLists(SinglyLinkedListNode head1, SinglyLinkedListNode head2) {
-        List<Integer> list1 = new ArrayList<>();
-        extractList(head1,list1);
-        extractList(head2,list1);
-        Collections.sort(list1);
-        SinglyLinkedList singlyLinkedList = new SinglyLinkedList();
-        list1.forEach(singlyLinkedList::insertNode);
-        return singlyLinkedList.head;
-    }
-
-    private static void extractList(SinglyLinkedListNode head, List<Integer> list) {
+    static SinglyLinkedListNode reverse(SinglyLinkedListNode head) {
+        List<Integer> a = new ArrayList<>();
+        SinglyLinkedList llist = new SinglyLinkedList();
         while (head != null) {
-            list.add(head.data);
+            a.add(0, head.data);
             head = head.next;
         }
+        a.forEach(llist::insertNode);
+        return llist.head;
     }
-    // Complete the mergeLists function below.
+    // Complete the reverse function below.
 
     public static void main(String[] args) throws IOException {
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("output.txt"));
 
         int tests = scanner.nextInt();
-        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-
+        scanner.skip(PATTERN);
         for (int testsItr = 0; testsItr < tests; testsItr++) {
-            SinglyLinkedList llist1 = new SinglyLinkedList();
-
-            int llist1Count = scanner.nextInt();
-            scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-
-            for (int i = 0; i < llist1Count; i++) {
-                int llist1Item = scanner.nextInt();
-                scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-
-                llist1.insertNode(llist1Item);
+            SinglyLinkedList llist = new SinglyLinkedList();
+            int llistCount = scanner.nextInt();
+            scanner.skip(PATTERN);
+            for (int i = 0; i < llistCount; i++) {
+                int llistItem = scanner.nextInt();
+                scanner.skip(PATTERN);
+                llist.insertNode(llistItem);
             }
-
-            SinglyLinkedList llist2 = new SinglyLinkedList();
-
-            int llist2Count = scanner.nextInt();
-            scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-
-            for (int i = 0; i < llist2Count; i++) {
-                int llist2Item = scanner.nextInt();
-                scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-
-                llist2.insertNode(llist2Item);
-            }
-
-            SinglyLinkedListNode llist3 = mergeLists(llist1.head, llist2.head);
-
-            printSinglyLinkedList(llist3, " ", bufferedWriter);
+            SinglyLinkedListNode llist1 = reverse(llist.head);
+            printSinglyLinkedList(llist1, " ", bufferedWriter);
             bufferedWriter.newLine();
         }
-
         bufferedWriter.close();
-
         scanner.close();
     }
 
@@ -111,13 +87,11 @@ public class MergeTwoSortedLinkedLists {
 
         public void insertNode(int nodeData) {
             SinglyLinkedListNode node = new SinglyLinkedListNode(nodeData);
-
             if (this.head == null) {
                 this.head = node;
             } else {
                 this.tail.next = node;
             }
-
             this.tail = node;
         }
     }

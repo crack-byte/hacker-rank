@@ -1,8 +1,10 @@
-package com.crackbyte.problemsolving;
+package com.crackbyte.practice.problemsolving;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import static com.crackbyte.utils.Constants.PATTERN;
 
 public class PrintInReverse {
 
@@ -40,31 +42,24 @@ public class PrintInReverse {
 
     public static void main(String[] args) {
         int tests = scanner.nextInt();
-        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-
+        scanner.skip(PATTERN);
         for (int testsItr = 0; testsItr < tests; testsItr++) {
             SinglyLinkedList llist = new SinglyLinkedList();
-
             int llistCount = scanner.nextInt();
-            scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-
+            scanner.skip(PATTERN);
             for (int i = 0; i < llistCount; i++) {
                 int llistItem = scanner.nextInt();
-                scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-
+                scanner.skip(PATTERN);
                 llist.insertNode(llistItem);
             }
-
             reversePrint(llist.head);
         }
-
         scanner.close();
     }
 
     static class SinglyLinkedListNode {
         public int data;
         public SinglyLinkedListNode next;
-
         public SinglyLinkedListNode(int nodeData) {
             this.data = nodeData;
             this.next = null;
@@ -82,13 +77,11 @@ public class PrintInReverse {
 
         public void insertNode(int nodeData) {
             SinglyLinkedListNode node = new SinglyLinkedListNode(nodeData);
-
             if (this.head == null) {
                 this.head = node;
             } else {
                 this.tail.next = node;
             }
-
             this.tail = node;
         }
     }
